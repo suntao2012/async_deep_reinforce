@@ -175,7 +175,7 @@ class A3CTrainingThread(object):
       batch_td.reverse()
       batch_R.reverse()
 
-      sess.run( self.apply_gradients,
+      sess.run( self.local_network.v, #apply_gradients,
                 feed_dict = {
                   self.local_network.s: batch_si,
                   self.local_network.a: batch_a,
@@ -185,7 +185,7 @@ class A3CTrainingThread(object):
                   self.local_network.step_size : [len(batch_a)],
                   self.learning_rate_input: cur_learning_rate } )
     else:
-      sess.run( self.apply_gradients,
+      sess.run( self.local_network.v, #apply_gradients,
                 feed_dict = {
                   self.local_network.s: batch_si,
                   self.local_network.a: batch_a,
